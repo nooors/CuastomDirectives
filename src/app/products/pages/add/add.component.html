@@ -10,15 +10,23 @@
       <input type="text" class="form-control" formControlName="name" />
     </div>
     <div class="col-auto">
-      <span class="form-text" *ngIf="hasError('name')">
-        Field Required
+      <span
+        error-msg
+        [color]="color"
+        [userName]="userName"
+        [valid]="!hasError('name')"
+      >
+        {{"This field is required, " + userName}}
       </span>
     </div>
   </div>
   <div class="row mt-3">
     <div class="col">
-      <button class="btn btn-primary">
-        Save
+      <button class="btn btn-primary" (click)="changeName()">
+        Chnage Name
+      </button>
+      <button class="btn btn-primary mx-3" (click)="changeColor()">
+        Change Color
       </button>
     </div>
   </div>
@@ -27,3 +35,11 @@
 <h3 class="mt-5">Form</h3>
 <pre>Value: {{ myForm.value | json}}</pre>
 <pre>Valid: {{ myForm.valid | json}}</pre>
+
+<div class="row mt-5" *myCustomIf="myForm.valid">
+  <div class="col">
+    <div class="alert alert-primary">
+      All OK!
+    </div>
+  </div>
+</div>
